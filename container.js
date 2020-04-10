@@ -6,12 +6,12 @@ const container = dependable.container();
 const Dependencies = [
     ['_','lodash'],
     ['async','async'],
-    ['express','express'],
-    ['moment','moment'],
-    ['mongoose','mongoose'],
-    ['passport','passport']
+    ['passport','passport'],
+    ['validator','express-validator']
 
 ];
+
+
 
 Dependencies.forEach(function(val){
     container.register(val[0],function(){

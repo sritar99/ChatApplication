@@ -3,7 +3,7 @@ const bodyparser = require('body-parser');
 const ejs = require('ejs');
 const http = require('http');
 const cookieParser = require('cookie-parser');
-const validator = require('express-validator');
+// const validator = require('express-validator');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
@@ -16,10 +16,10 @@ const container = require('./container');
 
 
 
-container.resolve(function(users,_){
+container.resolve(function(users, _, admin){
 
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://localhost:27017/chatapplication',{useMongoClient:true});
+    mongoose.connect('mongodb://localhost:27017/chatapplication',{useNewUrlParser:true});
 
     const app =SetupExpress();
 
@@ -35,6 +35,8 @@ container.resolve(function(users,_){
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
+        admin.SetRouting(router)
+
         app.use(router);
 
     }
@@ -51,7 +53,7 @@ container.resolve(function(users,_){
         app.use(bodyparser.json());
         app.use(bodyparser.urlencoded({extended:true}));
         
-        app.use(validator());
+        // app.use(validator());
         app.use(session({
             secret: "thisisasecretkey",
             resave: true,

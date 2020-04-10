@@ -38,6 +38,13 @@ passport.use('local.signup',new LocalStrategy({
             done(null,newUser);
         });
 
+
+        // User.create({
+        //     username: req.body.username,
+        //     email: req.body.email,
+        //     password: req.body.password,
+        // });
+
     });
 
 }));
@@ -61,6 +68,11 @@ passport.use('local.login',new LocalStrategy({
             messages.push('Email or Password is Invalid');
             return done(null,false,req.flash('error',messages));
         }
+
+        // if(!user || !user.password === password){
+        //     messages.push('Email or Password is Invalid');
+        //     return done(null,false,req.flash('error',messages));
+        // }
 
         return done(null,user);
     });
