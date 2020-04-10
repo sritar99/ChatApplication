@@ -7,7 +7,8 @@ const Dependencies = [
     ['_','lodash'],
     ['async','async'],
     ['passport','passport'],
-    ['validator','express-validator']
+    ['validator','express-validator'],
+    ['formidable','formidable']
 
 ];
 
