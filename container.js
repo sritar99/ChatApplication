@@ -8,7 +8,9 @@ const Dependencies = [
     ['async','async'],
     ['passport','passport'],
     ['validator','express-validator'],
-    ['formidable','formidable']
+    ['formidable','formidable'],
+    ['Group','./models/groups'],
+    ['aws','./helpers/AWSUpload'],
 
 ];
 

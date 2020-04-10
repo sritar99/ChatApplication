@@ -1,16 +1,29 @@
 
 
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 
 
-module.exports = function(formidable){
+module.exports = function(formidable,Group,aws){
 
     return{
         SetRouting: function(router){
             router.get('/dashboard',this.adminPage);
 
-            router.post('/uploadFile',this.uploadFile);
+            router.post('/uploadFile',aws.Upload.any(),this.uploadFile);
+            router.post('/dashboard',this.adminPostPage);
+        },
+
+        adminPostPage: function(req,res){
+
+            const newGroup = new Group();
+            newGroup.name = req.body.group;
+            newGroup.country = req.body.country;
+            newGroup.image = req.body.upload;
+
+            newGroup.save((err)=>{
+                res.render('admin/dashboard');
+            });
         },
 
 
@@ -20,17 +33,17 @@ module.exports = function(formidable){
 
         uploadFile: function(req,res){
             const form = new formidable.IncomingForm();
-            form.uploadDir = path.join(__dirname,'../public/uploads');
+            // form.uploadDir = path.join(__dirname,'../public/uploads');
 
 
             form.on('file',(field,file)=>{
-                fs.rename(file.path,path.join(form.uploadDir,file.name),(err)=>{
-                    if(err){
-                        console.log(err);
-                    }else{
-                        console.log("File Named Successfully")
-                    }
-                })
+                // fs.rename(file.path,path.join(form.uploadDir,file.name),(err)=>{
+                //     if(err){
+                //         console.log(err);
+                //     }else{
+                //         console.log("File Named Successfully")
+                //     }
+                // })
             });
 
 
