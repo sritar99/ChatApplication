@@ -2,13 +2,25 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const ejs = require('ejs');
 const http = require('http');
+const cookieParser = require('cookie-parser');
+const validator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const passport = require('passport');
+
+
+
 const container = require('./container');
 
 
 
+container.resolve(function(users,_){
 
+    mongoose.Promise = global.Promise;
+    mongoose.connect('mongodb://localhost:27017/chatapplication',{useMongoClient:true});
 
-container.resolve(function(users){
     const app =SetupExpress();
 
     function SetupExpress(){
@@ -25,18 +37,34 @@ container.resolve(function(users){
         users.SetRouting(router);
         app.use(router);
 
-        app.use(function(req, res){
-            res.render('404');
-        });
     }
 
     
 
 
     function ConfigureExpress(app){
+
+        require('./passport/passport-local');
         app.use(express.static('public'));
+        app.use(cookieParser());
         app.set('view engine','ejs');
-        app.use(bodyparser.json);
-        app.use(bodyparser.urlencoded({extended:true}))
+        app.use(bodyparser.json());
+        app.use(bodyparser.urlencoded({extended:true}));
+        
+        app.use(validator());
+        app.use(session({
+            secret: "thisisasecretkey",
+            resave: true,
+            saveInitialized: true,
+            store: new MongoStore({mongooseConnection: mongoose.connection})
+        }))
+
+        app.use(flash());
+        app.use(passport.initialize());
+        app.use(passport.session());
+
+        app.locals._ = _;
+
+        
     }
 });

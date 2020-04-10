@@ -7,7 +7,9 @@ const Dependencies = [
     ['_','lodash'],
     ['async','async'],
     ['express','express'],
-    ['moment','moment']
+    ['moment','moment'],
+    ['mongoose','mongoose'],
+    ['passport','passport']
 
 ];
 
@@ -25,4 +27,4 @@ container.register('container',function(){
 });
 
 
-module.exports=container;
+module.exports = container;
