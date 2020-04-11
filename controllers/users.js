@@ -10,7 +10,7 @@ module.exports = function(_,passport,User,validator){
 
             router.get('/',this.indexPage);
             router.get('/signup',this.getSignUp);
-            router.get('/home',this.homePage);
+            
 
 
             router.post('/',[
@@ -72,10 +72,7 @@ module.exports = function(_,passport,User,validator){
         }),
         
         
-        homePage: function(req,res){
-            console.log(req.url);
-            return res.render('home');
-        },
+        
 
         
 

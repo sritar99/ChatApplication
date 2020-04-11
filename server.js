@@ -16,7 +16,7 @@ const container = require('./container');
 
 
 
-container.resolve(function(users, _, admin){
+container.resolve(function(users, _, admin,home,groupChannel){
 
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost:27017/chatapplication',{useNewUrlParser:true});
@@ -35,7 +35,9 @@ container.resolve(function(users, _, admin){
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
-        admin.SetRouting(router)
+        admin.SetRouting(router);
+        home.SetRouting(router);
+        groupChannel.SetRouting(router);
 
         app.use(router);
 
