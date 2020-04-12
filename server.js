@@ -9,7 +9,8 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-
+const socketIO = require('socket.io');
+var $ = require('jquery');
 
 
 const container = require('./container');
@@ -26,12 +27,14 @@ container.resolve(function(users, _, admin,home,groupChannel){
     function SetupExpress(){
         const app = express();
         const server = http.createServer(app);
+        const io = socketIO(server);
 
         server.listen(4000,function(){
             console.log("Server is Listening in the port 4000");
         });
 
-        ConfigureExpress(app);
+        ConfigureExpress(app, io);
+        require('./socket/groupchat')(io);
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
@@ -46,7 +49,7 @@ container.resolve(function(users, _, admin,home,groupChannel){
     
 
 
-    function ConfigureExpress(app){
+    function ConfigureExpress(app, io){
 
         require('./passport/passport-local');
         app.use(express.static('public'));

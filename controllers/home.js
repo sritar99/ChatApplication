@@ -26,8 +26,8 @@ module.exports = function(async, Group, _,formidable,aws){
                     dataChunk.push(res1.slice(i, i+chunkSize));
                 }
 
-                console.log(res1);
-                console.log(dataChunk);
+                // console.log(res1);
+                // console.log(dataChunk);
                 res.render('home',{title: "Home", chunk: dataChunk});
             })
             
