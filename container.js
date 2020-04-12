@@ -10,8 +10,7 @@ const Dependencies = [
     ['validator','express-validator'],
     ['formidable','formidable'],
     ['Group','./models/groups'],
-    ['aws','./helpers/AWSUpload'],
-
+    ['aws','./helpers/AWSUpload'], 
 ];
 
 
