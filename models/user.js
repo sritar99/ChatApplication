@@ -7,6 +7,19 @@ const userSchema = mongoose.Schema({
     email: {type:String, unique:true},
     password: {type:String, default:''},
     // userImage: {type:String, default:'default.png'},
+    sentRequest: [{
+        username: {type: String, default: ''}
+    }],
+    request: [{
+        userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        username: {type: String, default: ''}
+    }],
+    friendsList: [{
+        friendId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        friendName: {type: String, default: ''}
+    }],
+    totalRequest: {type: Number, default: 0},
+
 
 });
 

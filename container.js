@@ -11,6 +11,7 @@ const Dependencies = [
     ['formidable','formidable'],
     ['Group','./models/groups'],
     ['aws','./helpers/AWSUpload'], 
+    ['Users','./models/user'],
 ];
 
 

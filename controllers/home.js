@@ -28,7 +28,7 @@ module.exports = function(async, Group, _,formidable,aws){
 
                 // console.log(res1);
                 // console.log(dataChunk);
-                res.render('home',{title: "Home", chunk: dataChunk});
+                res.render('home',{title: " Chat Home", user: req.user, chunk: dataChunk});
             })
             
         },

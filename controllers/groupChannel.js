@@ -4,6 +4,7 @@ module.exports = function(){
     return{
         SetRouting: function(router){
             router.get('/group/:name',this.groupPage);
+            router.get('/group/:name',this.groupPostPage);
 
             
         },

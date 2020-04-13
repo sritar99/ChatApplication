@@ -33,7 +33,7 @@ module.exports = function(_,passport,User,validator){
         },
 
         postLogin: passport.authenticate('local.login',{
-            successRedirect: '/home',
+            successRedirect: '/group/GroupA',
             failureRedirect: '/',
             failureFlash:true
         }),
@@ -66,7 +66,7 @@ module.exports = function(_,passport,User,validator){
         },
 
         postSignUp: passport.authenticate('local.signup',{
-            successRedirect: '/home',
+            successRedirect: '/group/GroupA',
             failureRedirect: '/signup',
             failureFlash:true
         }),
