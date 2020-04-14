@@ -13,6 +13,7 @@ const socketIO = require('socket.io');
 var $ = require('jquery');
 
 const {Users} = require('./helpers/UsersClass')
+const {Global} = require('./helpers/Global')
 
 
 const container = require('./container');
@@ -38,6 +39,7 @@ container.resolve(function(users, _, admin,home,groupChannel){
         ConfigureExpress(app, io);
         require('./socket/groupchat')(io,Users);
         require('./socket/friend')(io);
+        require('./socket/globalroom')(io,Global,_);
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
@@ -53,6 +55,7 @@ container.resolve(function(users, _, admin,home,groupChannel){
 
 
     function ConfigureExpress(app, io){
+        
 
         require('./passport/passport-local');
         app.use(express.static('public'));

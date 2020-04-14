@@ -7,6 +7,8 @@ module.exports = function(Users,async){
             
             router.post('/group/:name',this.groupPostPage);
 
+            router.get('/logout',this.logout);
+
             
         },
 
@@ -107,7 +109,7 @@ module.exports = function(Users,async){
                         });
                     }
                 },
-//this function is updated for the sender of the frnd request when it is accepted by the reciever
+                    //this function is updated for the sender of the frnd request when it is accepted by the reciever
                 function(callback){
                     if(req.body.senderId){
                         Users.updateOne({
@@ -173,5 +175,15 @@ module.exports = function(Users,async){
                 res.redirect('/group/'+req.params.name);
             });
         },
+
+
+
+        logout: function(req, res){
+            req.logout();
+            req.session.destroy((err) => {
+               res.redirect('/');
+            });
+
+        }
     }
 }

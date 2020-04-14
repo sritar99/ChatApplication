@@ -7,6 +7,8 @@ module.exports = function(async, Group, _,formidable,aws){
 
             router.post('/uploadFile',aws.Upload.any(),this.uploadFile);
             router.post('/home',this.adminPostPage,this.homePage);
+
+            router.get('/logout',this.logout);
         },
 
         homePage: function(req,res){
@@ -74,6 +76,15 @@ module.exports = function(async, Group, _,formidable,aws){
             });
 
             form.parse(req);
+        },
+
+        logout: function(req, res){
+            req.logout();
+            req.session.destroy((err) => {
+               res.redirect('/');
+            });
+
         }
+
     }
 }
