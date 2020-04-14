@@ -11,7 +11,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const socketIO = require('socket.io');
 var $ = require('jquery');
-const {Users} = require('./helpers/UsersClass');
+
+const {Users} = require('./helpers/UsersClass')
 
 
 const container = require('./container');

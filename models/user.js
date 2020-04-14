@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
     email: {type:String, unique:true},
     password: {type:String, default:''},
     // userImage: {type:String, default:'default.png'},
-    sentRequest: [{
+    c: [{
         username: {type: String, default: ''}
     }],
     request: [{
