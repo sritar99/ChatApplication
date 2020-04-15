@@ -20,7 +20,7 @@ const container = require('./container');
 
 
 
-container.resolve(function(users, _, admin,home,groupChannel){
+container.resolve(function(users, _, admin,home,groupChannel,privatechat){
 
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost:27017/chatapplication',{useNewUrlParser:true});
@@ -40,12 +40,14 @@ container.resolve(function(users, _, admin,home,groupChannel){
         require('./socket/groupchat')(io,Users);
         require('./socket/friend')(io);
         require('./socket/globalroom')(io,Global,_);
+        require('./socket/privatemsg')(io);
 
         const router = require('express-promise-router')();
         users.SetRouting(router);
         admin.SetRouting(router);
         home.SetRouting(router);
         groupChannel.SetRouting(router);
+        privatechat.SetRouting(router);
 
         app.use(router);
 

@@ -105,6 +105,81 @@
                         
                     </ul>
                 </li>
+
+                <li>
+                    <% var numberOfTrue = 0 %>
+ 
+                    <% for(var i = 0; i < chat.length; i++) { %>
+                        <%  if(chat[i].body.isRead === false){  %>
+                            <%  numberOfTrue = numberOfTrue + 1  %>
+                        <%  } %>
+                    <%} %>
+                    
+
+
+
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-globe "></span> <b class="caret"></b> 
+                        <% if(numberOfTrue !== 0) {%>
+                            <span class="label label-primary nav-label-icon" id=""><%= numberOfTrue %></span>
+                        <% } else { %>
+                            <span class="label label-primary nav-label-icon" id=""></span>
+                        <% } %>
+                    </a>
+
+                    <ul class="dropdown-menu dmenu">
+                        <li>
+                            <div class="navbar-login">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="dropdown-tag">
+                                            <h3 class="text-center dropdown-tag-head">
+                                                Notifications
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <a href="">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <p class="text-center">
+                                            <img src="https://placehold.it/300x300" class="img-circle img-responsive dropdown-img" />
+                                            </p>
+                                        </div>
+                                        <div class="col-md-9 pleft-0">
+                                            <div class="row">
+                                                <div class="col-md-12 textRow">
+                                                    <div class="col-md-12" id="textRow">
+                                                        <p class="text-left drop-name">
+                                                            <strong>Sender Name</strong>
+                                                        </p>
+                                                        Body
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </a>
+                                    <hr class="dropdown-divider" />
+
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+
+
+                </li>
+
+
+
+
+
+                
                 <li><a href="#">Members</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= user.username %><span class="caret"></span></a>
@@ -147,7 +222,7 @@
                                                         <i class="fa fa-circle online" aria-hidden="true"></i>
                                                         Online
                                                     </p>
-                                                
+                                                    
                                                 </div>
                                                 <div class="footer">
                                                     <i class="fa fa-mail-forward"></i> 
@@ -201,8 +276,8 @@
                         <div class="row">
                             <div class="new_message_head">
                                 <div class="pull-left">
-                                <button class="club_name">
-                                  <%= groupName%>
+                                <button id="receiver_name">
+                                    @<%= _.upperFirst(name) %>
                                 </button>
                                 </div>
                                 <div class="pull-right">
@@ -242,9 +317,8 @@
                             </div>
 
                             <div class="message_write">
-                              <form id="message-form" method="post">
-                                <input type="hidden" id="groupName" value="<%= groupName %>"> 
-                                <input type="hidden" id="sender" name="sender" value="<%= user.username %>"> 
+                              <form id="message_form" method="post">
+                                
 
                                   <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
                                   <div class="clearfix"></div>
@@ -258,58 +332,6 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3 col-md-3 mob-50 mob-clearfix">
-
-
-                        <div class="new_message_head">
-                            <div class="pull-left">
-                                <button class="club_fans">
-                                    <i class="fa fa-users" aria-hidden="true" style="padding-right:15px; color:#3b5998 !important;"></i>
-                                    Connected Friends <span id="numValue"></span>
-                                </button>
-                            </div>
-                        </div>
-
-
-
-                        <div class="gr-rightsidebar">
-
-                            <div id="myModal" class="modal fade" role="dialog">
-                              <div class="modal-dialog">
-
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h3 class="modal-title" id="name"></h3>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form action="" method="get" id="add_friend">
-                                        <input type="hidden" name="receiverName" id="receiverName" value="">
-                                        <input type="hidden" name="sender-name" id="sender-name" value="<%= user.username %>">
-                                        <button type="submit" id="friend-add" class="btn add"><i class="fa fa-user"></i> Add Friend</button>
-                                        
-                                        <a id="nameLink" class="btn ">View Profile</a>
-
-                                        <div id="myTest">
-                                            
-                                        </div>
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn_close" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-
-                            <div class="col-md-12"  id="main">
-                                <div id="users"></div>
-                                
-                            </div>
-
-                        </div>
-                    </div>
 
                 </div>
 
@@ -325,6 +347,8 @@
 <script src="/js/group/groupchat.js"></script>
 <script src="/js/group/sendrequest.js"></script>
 <script src="/js/global.js"></script>
+<script src="/js/myparam.js"></script>
+<script src="/js/private/privatemsg.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
 
 
@@ -333,3 +357,4 @@
 </html>
 
 
+ 

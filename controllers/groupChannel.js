@@ -1,5 +1,5 @@
 
-module.exports = function(Users,async){
+module.exports = function(Users,async,Group){
 
     return{
         SetRouting: function(router){
@@ -26,7 +26,7 @@ module.exports = function(Users,async){
             ],(err,results)=>{
                 const result1 = results[0];
                 // console.log(result1.request[0].userId);
-                console.log("line 27"+result1);
+                console.log("line-----27"+result1);
                 res.render('groupchat/groupChannel',{title:"Chat Home",user:req.user,groupName: name,data:result1});
             });
 
