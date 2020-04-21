@@ -4,6 +4,7 @@ $(document).ready(function(){
     var room = $('#groupName').val();
 
     var sender = $('#sender').val();
+    console.log(sender);
     
     socket.on('connect',function(){
         console.log("Oh User Got Connected!");
@@ -20,7 +21,12 @@ $(document).ready(function(){
     socket.on('usersList',function(users){
         var ol = $('<ol></ol>');
         for(var i=0 ; i<users.length;i++){
-            ol.append('<p><a id="val" data-toggle="modal" data-target="#myModal">' +users[i]+'</a></p>')
+            if(users[i]===sender){
+                
+            }else{
+                ol.append('<p><a id="val" data-toggle="modal" data-target="#myModal">' +users[i]+'</a></p>');
+            }
+            
         }
         
         $(document).on('click', '#val', function(){
@@ -63,6 +69,18 @@ $(document).ready(function(){
         },function(){
             $('#msg').val('');
         });
+
+        $.ajax({
+            url:'/group/'+room,
+            type: 'POST',
+            data: {
+                message: msg,
+                groupName:room
+            },
+            success: function(){
+                $('#msg').val('');
+            }
+        })
 
     });
 });

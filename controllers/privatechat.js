@@ -72,9 +72,10 @@ module.exports = function(async,Users,Message){
                 const params = req.params.name.split('.');
                 const nameParams = params[0];
                 // console.log(result1.request[0].userId);
-        //          console.log("line 27"+result1);
+                // console.log("line 27"+result1);
                 // console.log(req.user);
-                console.log(nameParams);
+                // console.log(result3)
+                // console.log(nameParams);
                 
                 res.render('private/privatechat', {title: 'Chat Home', user:req.user, data: result1, chat: result2, chats:result3, name:nameParams});
             });
@@ -120,7 +121,23 @@ module.exports = function(async,Users,Message){
                 res.redirect('/chat/'+req.params.name);
             });
             
-            FriendResult.PostRequest(req, res, '/chat/'+req.params.name);
+
+
+            async.parallel([
+                function(callback){
+                    if(req.body.chatId){
+                        Message.updateOne({
+                            '_id':req.body.chatId
+                        },{
+                            "isRead":true
+                        },(err,done)=>{
+                            callback(err,done);
+                        })
+                    }
+                }
+            ],(err, results) => {
+                res.redirect('/chat/'+req.params.name);
+            });
             
         },
 

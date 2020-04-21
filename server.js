@@ -11,7 +11,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const socketIO = require('socket.io');
 var $ = require('jquery');
-
+const path = require('path');
 const {Users} = require('./helpers/UsersClass')
 const {Global} = require('./helpers/Global')
 
@@ -63,6 +63,7 @@ container.resolve(function(users, _, admin,home,groupChannel,privatechat){
         app.use(express.static('public'));
         app.use(cookieParser());
         app.set('view engine','ejs');
+        app.set('views', path.join(__dirname, 'views'));
         app.use(bodyparser.json());
         app.use(bodyparser.urlencoded({extended:true}));
         

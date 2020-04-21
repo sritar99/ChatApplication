@@ -13,6 +13,7 @@ const Dependencies = [
     ['aws','./helpers/AWSUpload'], 
     ['Users','./models/user'],
     ['Message','./models/message'],
+    ['GroupMsg','./models/groupmessage']
 ];
 
 

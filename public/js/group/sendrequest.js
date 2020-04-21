@@ -57,6 +57,7 @@ $(document).ready(function(){
         
         var receiverName = $('#receiverName').val();
         
+        
         $.ajax({
             url: '/group/'+room,
             type: 'POST',
